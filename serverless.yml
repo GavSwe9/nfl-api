@@ -1,0 +1,22 @@
+
+service: nfl-api
+# app: nfl
+org: gavswe
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: python3.8
+  lambdaHashingVersion: 20201221
+
+functions:
+  downAndDistance:
+    handler: downAndDistance.downAndDistance
+    events:
+      - httpApi:
+          path: /downAndDistance
+          method: post
+    
+plugins:
+  - serverless-python-requirements
