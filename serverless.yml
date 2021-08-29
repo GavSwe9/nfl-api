@@ -9,6 +9,7 @@ provider:
   name: aws
   runtime: python3.8
   lambdaHashingVersion: 20201221
+  timeout: 15
 
 functions:
   downAndDistance:
@@ -16,6 +17,27 @@ functions:
     events:
       - httpApi:
           path: /downAndDistance
+          method: post
+  
+  quarterbackBoard:
+    handler: quarterbackBoard.quarterbackBoard
+    events:
+      - httpApi:
+          path: /quarterbackBoard
+          method: post
+
+  runningbackBoard:
+    handler: runningbackBoard.runningbackBoard
+    events:
+      - httpApi:
+          path: /runningbackBoard
+          method: post
+
+  receiverBoard:
+    handler: receiverBoard.receiverBoard
+    events:
+      - httpApi:
+          path: /receiverBoard
           method: post
     
 plugins:
