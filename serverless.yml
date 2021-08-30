@@ -19,25 +19,25 @@ functions:
           path: /downAndDistance
           method: post
   
-  quarterbackBoard:
-    handler: quarterbackBoard.quarterbackBoard
+  passingBoard:
+    handler: leaderboards/passingBoard.passingBoard
     events:
       - httpApi:
-          path: /quarterbackBoard
+          path: /passingBoard
           method: post
 
-  runningbackBoard:
-    handler: runningbackBoard.runningbackBoard
+  rushingBoard:
+    handler: leaderboards/rushingBoard.rushingBoard
     events:
       - httpApi:
-          path: /runningbackBoard
+          path: /rushingBoard
           method: post
 
-  receiverBoard:
-    handler: receiverBoard.receiverBoard
+  receivingBoard:
+    handler: leaderboards/receivingBoard.receivingBoard
     events:
       - httpApi:
-          path: /receiverBoard
+          path: /receivingBoard
           method: post
     
 plugins:

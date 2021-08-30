@@ -1,9 +1,8 @@
-from BuildPositionBoardWhereClause import buildPositionBoardWhereClause
 import json
 from responseTemplate import responseTemplate
 from mysql.connector import connect, Error
 from awsSecrets import getDbPass
-from BuildPositionBoardWhereClause import buildPositionBoardWhereClause
+from buildPositionBoardWhereClause import buildPositionBoardWhereClause
 
 def receiverBoard(event, context):
     body = json.loads(event["body"]);
