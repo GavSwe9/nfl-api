@@ -30,15 +30,10 @@ def rushingBoard(event, context):
         P.Name,
         L.TeamAbv,
         L.Season,
+
         SUM(L.Games) AS Games,
         SUM(L.RushingAttempts) AS RushingAttempts,
         SUM(L.RushingYards) AS RushingYards,
-
-        COALESCE(SUM(GLRC.Targets), 0) AS Targets,
-        COALESCE(SUM(GLRC.Receptions), 0) AS Receptions,
-        COALESCE(SUM(GLRC.ReceivingYards), 0) AS ReceivingYards,
-        COALESCE(SUM(GLRC.YardsAfterCatch), 0) AS YardsAfterCatch,
-        SUM(L.RushingYards) + COALESCE(SUM(GLRC.ReceivingYards), 0) AS TotalYards,
 
         COALESCE(
             ROUND(
@@ -60,6 +55,12 @@ def rushingBoard(event, context):
                 SUM(L.Games)
             , 2)
         , 0) AS RushingYardsPerAttempt,
+
+
+        COALESCE(SUM(GLRC.Targets), 0) AS Targets,
+        COALESCE(SUM(GLRC.Receptions), 0) AS Receptions,
+        COALESCE(SUM(GLRC.ReceivingYards), 0) AS ReceivingYards,
+        COALESCE(SUM(GLRC.YardsAfterCatch), 0) AS YardsAfterCatch,
 
         COALESCE(
             ROUND(
@@ -88,6 +89,9 @@ def rushingBoard(event, context):
                 SUM(GLRC.Receptions)
             , 1)
         , 0) AS YardsAfterCatchPerReception,
+
+
+        SUM(L.RushingYards) + COALESCE(SUM(GLRC.ReceivingYards), 0) AS TotalYards,
 
         COALESCE(
             ROUND(
@@ -126,30 +130,35 @@ def formatResult(row):
         "team": str(row[2]),
         "season": int(row[3]),
         "games": int(row[4]),
+
         "rushingAttempts": int(row[5]),
         "rushingYards": int(row[6]),
-        "targets": int(row[7]),
-        "receptions": int(row[8]),
-        "receivingYards": int(row[9]),
-        "yardsAfterCatch": int(row[10]),
-        "totalYards": int(row[11]),
-        "rushingAttemptsPerGame": float(row[12]),
-        "rushingYardsPerGame": float(row[13]),
-        "rushingYardsPerAttempt": float(row[14]),
-        "targetsPerGame": float(row[15]),
-        "receptionsPerTarget": float(row[16]),
-        "yardsPerReception": float(row[17]),
-        "yardsAfterCatchPerReception": float(row[18]),
+        
+        "rushingAttemptsPerGame": float(row[7]),
+        "rushingYardsPerGame": float(row[8]),
+        "rushingYardsPerAttempt": float(row[9]),
+
+        "targets": int(row[10]),
+        "receptions": int(row[11]),
+        "receivingYards": int(row[12]),
+        "yardsAfterCatch": int(row[13]),
+
+        "targetsPerGame": float(row[14]),
+        "receptionsPerTarget": float(row[15]),
+        "yardsPerReception": float(row[16]),
+        "yardsAfterCatchPerReception": float(row[17]),
+        
+        "totalYards": int(row[18]),
         "totalYardsPerGame": float(row[19])
     }
 
-# event = {
-#     "body": json.dumps({
-#         "season": 2020,
-#         "seasonType": ["REG","POST"],
-#         # "weeks": [1,2,3]
-#     })
-# }
-# res = runningbackBoard(event, {});
+event = {
+    "body": json.dumps({
+        "season": 2020,
+        "seasonType": ["REG","POST"],
+        # "weeks": [1,2,3]
+    })
+}
+res = rushingBoard(event, {});
 
-# print(res);
+print(res);
