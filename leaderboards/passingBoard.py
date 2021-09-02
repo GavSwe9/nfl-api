@@ -94,8 +94,8 @@ def passingBoard(event, context):
             , 2)
         , 0) AS AirYardCompletionPercentage,
 
-        SUM(GLRS.RushingAttempts) AS RushingAttempts,
-        SUM(GLRS.RushingYards) AS RushingYards,
+        COALESCE(SUM(GLRS.RushingAttempts), 0) AS RushingAttempts,
+        COALESCE(SUM(GLRS.RushingYards), 0) AS RushingYards,
 
         COALESCE(
             ROUND(
@@ -118,9 +118,14 @@ def passingBoard(event, context):
             , 2)
         , 0) AS RushingYardsPerAttempt,
 
+        COALESCE(SUM(L.PassingYards), 0) + COALESCE(SUM(GLRS.RushingYards), 0) AS TotalYards,
+
         COALESCE(
-                SUM(GLRS.RushingYards) + SUM(L.PassingYards)
-        , 0) AS TotalYards
+            ROUND(
+                (COALESCE(SUM(L.PassingYards), 0) + COALESCE(SUM(GLRS.RushingYards), 0)) / 
+                SUM(L.Games)
+            , 2)
+        , 0) AS TotalYardsPerGame
 
         FROM NFL.GameLogsPassing L
         LEFT JOIN NFL.GameLogsRushing GLRS ON L.PlayerId = GLRS.PlayerId AND L.GameId = GLRS.GameId
@@ -166,8 +171,8 @@ def formatResult(row):
         "airYardsAttemptedPerGame": float(row[16]),
         "airYardsCompletedPerGame": float(row[17]),
         "airYardCompletionPercentage": float(row[18]),
-        "rushingAttempts": float(row[19]),
-        "rushingYards": float(row[20]),
+        "rushingAttempts": int(row[19]),
+        "rushingYards": int(row[20]),
         "rushingAttemptsPerGame": float(row[21]),
         "rushingYardsPerGame": float(row[22]),
         "rushingYardsPerAttempt": float(row[23]),
