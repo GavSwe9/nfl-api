@@ -66,28 +66,28 @@ def rushingBoard(event, context):
             ROUND(
                 SUM(GLRC.Targets) /
                 SUM(L.Games)
-            , 1) 
+            , 2) 
         , 0) AS TargetsPerGame,
 
         COALESCE(
             ROUND(
                 SUM(GLRC.Receptions) /
                 SUM(GLRC.Targets)
-            , 1) 
+            , 2) 
         , 0) AS ReceptionsPerTarget,
 
         COALESCE(
             ROUND(
                 SUM(GLRC.ReceivingYards) / 
                 SUM(GLRC.Receptions)
-            , 1) 
+            , 2) 
         , 0) AS YardsPerReception,
 
         COALESCE(
             ROUND(
                 SUM(GLRC.YardsAfterCatch) / 
                 SUM(GLRC.Receptions)
-            , 1)
+            , 2)
         , 0) AS YardsAfterCatchPerReception,
 
 
@@ -97,7 +97,7 @@ def rushingBoard(event, context):
             ROUND(
                 (SUM(L.RushingYards) + SUM(GLRC.ReceivingYards))/
                 SUM(L.Games)
-            , 1) 
+            , 2) 
         , 0) AS TotalYardsPerGame
 
         FROM NFL.GameLogsRushing L

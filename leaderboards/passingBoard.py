@@ -55,8 +55,8 @@ def passingBoard(event, context):
         COALESCE(
             ROUND(
                 SUM(L.Completions) /
-                SUM(L.Attempts)
-            , 2)
+                SUM(L.Attempts) * 100
+            , 1)
         , 0) AS CompletionsPerAttempts,
 
         COALESCE(
@@ -90,8 +90,8 @@ def passingBoard(event, context):
         COALESCE(
             ROUND(
                 SUM(L.AirYardsCompleted) / 
-                SUM(L.AirYardsAttempted)
-            , 2)
+                SUM(L.AirYardsAttempted) *100
+            , 1)
         , 0) AS AirYardCompletionPercentage,
 
         COALESCE(SUM(GLRS.RushingAttempts), 0) AS RushingAttempts,

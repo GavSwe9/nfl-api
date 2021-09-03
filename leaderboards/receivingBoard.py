@@ -41,28 +41,28 @@ def receivingBoard(event, context):
             ROUND(
                 SUM(L.Targets) /
                 SUM(L.Games)
-            , 1) 
+            , 2) 
         , 0) AS TargetsPerGame,
 
         COALESCE(
             ROUND(
                 SUM(L.Receptions) /
                 SUM(L.Targets)
-            , 1) 
+            , 2) 
         , 0) AS ReceptionsPerTarget,
 
         COALESCE(
             ROUND(
                 SUM(L.ReceivingYards) / 
                 SUM(L.Receptions)
-            , 1) 
+            , 2) 
         , 0) AS YardsPerReception,
 
         COALESCE(
             ROUND(
                 SUM(L.YardsAfterCatch) / 
                 SUM(L.Receptions)
-            , 1)
+            , 2)
         , 0) AS YardsAfterCatchPerReception
 
         FROM NFL.GameLogsReceiving L
