@@ -51,8 +51,8 @@ def rushingBoard(event, context):
 
         COALESCE(
             ROUND(
-                SUM(L.RushingAttempts) / 
-                SUM(L.Games)
+                SUM(L.RushingYards) / 
+                SUM(L.RushingAttempts)
             , 2)
         , 0) AS RushingYardsPerAttempt,
 
