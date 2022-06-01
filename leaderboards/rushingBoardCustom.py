@@ -16,7 +16,7 @@ def runningbackBoard(event, context):
     whereClauses = buildPositionBoardWhereClause(body, keys);
 
     connection = connect(
-        host = 'dfs.cxqsjcdo8n1w.us-east-1.rds.amazonaws.com',
+        host = 'farm.cxqsjcdo8n1w.us-east-1.rds.amazonaws.com',
         user = 'GavSwe',
         password = getDbPass(),
         database = 'NFL'

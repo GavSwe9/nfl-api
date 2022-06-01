@@ -14,7 +14,7 @@ def downAndDistance(event, context):
     if ("distanceUpperBound" not in keys): return responseTemplate(400, "distanceUpperBound");
     
     connection = connect(
-        host = 'dfs.cxqsjcdo8n1w.us-east-1.rds.amazonaws.com',
+        host = 'farm.cxqsjcdo8n1w.us-east-1.rds.amazonaws.com',
         user = 'GavSwe',
         password = getDbPass(),
         database = 'NFL'
